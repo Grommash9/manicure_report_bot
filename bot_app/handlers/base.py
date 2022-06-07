@@ -1,7 +1,7 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import Message, ChatType
 from bot_app.misc import bot, dp
-from bot_app import db, markup
+from bot_app import db, markup, config
 from bot_app.state.user.base import User
 from bot_app.state.user.master import Master
 from bot_app.state.user.administrator import Administrator
@@ -10,6 +10,10 @@ from bot_app.state.user.administrator import Administrator
 @dp.message_handler(chat_type=ChatType.PRIVATE, commands=['start'], state='*')
 async def process_start(message: Message, state: FSMContext):
     user_data = await db.user.create(message.from_user)
+    if message.from_user.id in config.ADMINS:
+        await bot.send_message(message.from_user.id,
+                               'Вы авторизованы в боте как администратор, вам будут приходить заявки!')
+        return
     if user_data['role'] == 0:
         await state.set_state(User.PhoneNumber.phone)
         await bot.send_message(message.from_user.id,
