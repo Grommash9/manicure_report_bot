@@ -52,7 +52,7 @@ async def client_report_getter(message: Message, state: FSMContext):
         try:
             await bot.send_photo(admin,
                                  photo=message.photo[-1].file_id,
-                                 caption=f"<b>Закрытие смены</b>\n\n"
+                                 caption=f"<b>Закрытие смены @{message.from_user.username} {message.from_user.first_name}</b>\n\n"
                                          f"{message.caption}\n\n"
                                          f"Смена закрыта в: {data['time']}",
                                  )

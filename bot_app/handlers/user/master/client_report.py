@@ -39,7 +39,7 @@ async def client_report_getter(message: Message, state: FSMContext):
         try:
             await bot.send_photo(admin,
                                  photo=message.photo[-1].file_id,
-                                 caption=f"<b>Отчет по клиенту</b>\n\n"
+                                 caption=f"<b>Отчет по клиенту от @{message.from_user.username} {message.from_user.first_name}</b>\n\n"
                                          f"{message.caption}\n\n"
                                          f"Создано: {message.date}")
         except Exception as e:
