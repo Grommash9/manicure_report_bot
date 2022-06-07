@@ -46,16 +46,24 @@ async def client_report_getter(message: Message, state: FSMContext):
     data = await state.get_data()
     await state.finish()
     await state.set_state(Master.main)
-    admin_list: list = await db.user.get_all_admins()
-    admin_list.extend(config.ADMINS)
+    admin_list = await db.user.get_all_admins()
     for admin in admin_list:
         try:
             await bot.send_photo(admin,
                                  photo=message.photo[-1].file_id,
-                                 caption=f"<b>Закрытие смены @{message.from_user.username} {message.from_user.first_name}</b>\n\n"
+                                 caption=f"<b>Отчет по клиенту от @{message.from_user.username} {message.from_user.first_name}</b>\n\n"
                                          f"{message.caption}\n\n"
-                                         f"Смена закрыта в: {data['time']}",
-                                 )
+                                         f"Создано: {message.date}")
+        except Exception as e:
+            pass
+
+    for admin in config.ADMINS:
+        try:
+            await bot.send_photo(admin,
+                                 photo=message.photo[-1].file_id,
+                                 caption=f"<b>Отчет по клиенту от @{message.from_user.username} {message.from_user.first_name}</b>\n\n"
+                                         f"{message.caption}\n\n"
+                                         f"Создано: {message.date}")
         except Exception as e:
             pass
 
