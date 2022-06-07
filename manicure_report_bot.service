@@ -1,0 +1,15 @@
+[Unit]
+Description=Telegram bot manicure_report_bot
+After=syslog.target
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/home/manicure_report_bot/
+ExecStart=/home/manicure_report_bot/env/bin/python3 -m bot_app
+RestartSec=10
+Restart=always
+
+[Install]
+WantedBy=multi-user.target

@@ -44,12 +44,12 @@ async def get_all():
     await con.ensure_closed()
     return users
 
+
 async def set_role(user_id, role):
     con, cur = await create_dict_con()
     await cur.execute('update user set role = %s where user_id = %s', (role, user_id,))
-    user = await cur.fetchone()
+    await con.commit()
     await con.ensure_closed()
-    return user
 
 
 async def get_all_admins():
