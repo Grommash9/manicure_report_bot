@@ -21,7 +21,7 @@ async def client_report_cancel(message: Message, state: FSMContext):
     await state.set_state(Administrator.main)
     await bot.send_message(message.from_user.id,
                            'Отправка отчета отменена успешно',
-                           reply_markup=markup.user.master_m.main_menu())
+                           reply_markup=markup.user.administrator_m.main_menu())
 
 
 @dp.message_handler(content_types=aiogram.types.ContentType.TEXT, state=Administrator.EndDay.bouquet_group_cash_desk)
@@ -89,7 +89,7 @@ async def client_report_getter(message: Message, state: FSMContext):
     for admins in config.ADMINS:
         try:
             await bot.send_message(admins,
-                                   f'<b>Администратор @{message.from_user.username} {message.from_user.first_name} отправил отчет!</b>\n'
+                                   f'<b>Администратор @{message.from_user.username} #{message.from_user.first_name} отправил отчет!</b>\n'
                                    f'Суточный рапорт кассы Bouquet Group: \n<b>{data["bouquet_group_cash_desk"]}</b>\n'
                                    f'Суточный рапорт терминала Bouquet Group: \n<b>{data["bouquet_group_terminal"]}</b>\n'
                                    f'Суточный рапорт кассы Cosmetic Industry: \n<b>{data["bouquet_cosmetic_industry_cash_desk"]}</b>\n'

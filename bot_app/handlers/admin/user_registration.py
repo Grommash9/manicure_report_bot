@@ -6,8 +6,9 @@ from bot_app import db
 from bot_app.misc import bot, dp
 
 
-@dp.callback_query_handler(text_startswith='set-worker_')
+@dp.callback_query_handler(text_startswith='set-worker_', state='*')
 async def set_worker_call(call: CallbackQuery, state: FSMContext):
+    print('da')
     user_id = call.data.split('_')[-1]
     await call.answer()
     await call.message.delete()
@@ -24,7 +25,7 @@ async def set_worker_call(call: CallbackQuery, state: FSMContext):
                                f'Роль была установлена, оповещение было доставлено')
 
 
-@dp.callback_query_handler(text_startswith='set-admin_')
+@dp.callback_query_handler(text_startswith='set-admin_', state='*')
 async def set_admin_call(call: CallbackQuery, state: FSMContext):
     user_id = call.data.split('_')[-1]
     await call.answer()
@@ -43,7 +44,7 @@ async def set_admin_call(call: CallbackQuery, state: FSMContext):
 
 
 
-@dp.callback_query_handler(text_startswith='set-no_')
+@dp.callback_query_handler(text_startswith='set-no_', state='*')
 async def set_no_call(call: CallbackQuery, state: FSMContext):
     await call.answer('Запрос отклонен', show_alert=True)
     await call.message.delete()

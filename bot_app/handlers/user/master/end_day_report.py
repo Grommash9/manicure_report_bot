@@ -38,11 +38,6 @@ async def client_report_getter(message: Message, state: FSMContext):
 
 @dp.message_handler(content_types=aiogram.types.ContentType.PHOTO, state=Master.EndDayReport.photo)
 async def client_report_getter(message: Message, state: FSMContext):
-    if message.caption is None:
-        await bot.send_message(message.from_user.id,
-                               'Пожалуйста укажите описание к фото и попробуйте снова!',
-                               reply_markup=markup.base.cancel())
-        return
     data = await state.get_data()
     await state.finish()
     await state.set_state(Master.main)
@@ -51,9 +46,9 @@ async def client_report_getter(message: Message, state: FSMContext):
         try:
             await bot.send_photo(admin,
                                  photo=message.photo[-1].file_id,
-                                 caption=f"<b>Отчет по клиенту от @{message.from_user.username} {message.from_user.first_name}</b>\n\n"
-                                         f"{message.caption}\n\n"
-                                         f"Создано: {message.date}")
+                                 caption=f"<b>Закрытие смены @{message.from_user.username} #{message.from_user.first_name}</b>\n\n"
+                                         f"Комментарий: {message.caption}\n\n"
+                                         f"Смена закрыта в: {data['time']}")
         except Exception as e:
             pass
 
@@ -61,9 +56,9 @@ async def client_report_getter(message: Message, state: FSMContext):
         try:
             await bot.send_photo(admin,
                                  photo=message.photo[-1].file_id,
-                                 caption=f"<b>Отчет по клиенту от @{message.from_user.username} {message.from_user.first_name}</b>\n\n"
-                                         f"{message.caption}\n\n"
-                                         f"Создано: {message.date}")
+                                 caption=f"<b>Закрытие смены @{message.from_user.username} #{message.from_user.first_name}</b>\n\n"
+                                         f"Комментарий: {message.caption}\n\n"
+                                         f"Смена закрыта в: {data['time']}")
         except Exception as e:
             pass
 

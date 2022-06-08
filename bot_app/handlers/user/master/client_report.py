@@ -26,11 +26,6 @@ async def client_report_cancel(message: Message, state: FSMContext):
 
 @dp.message_handler(content_types=aiogram.types.ContentType.PHOTO, state=Master.ClientReport.photo)
 async def client_report_getter(message: Message, state: FSMContext):
-    if message.caption is None:
-        await bot.send_message(message.from_user.id,
-                               'Пожалуйста укажите описание к фото и попробуйте снова!',
-                               reply_markup=markup.base.cancel())
-        return
     await state.finish()
     await state.set_state(Master.main)
     admin_list = await db.user.get_all_admins()
@@ -38,9 +33,11 @@ async def client_report_getter(message: Message, state: FSMContext):
         try:
             await bot.send_photo(admin,
                                  photo=message.photo[-1].file_id,
-                                 caption=f"<b>Отчет по клиенту от @{message.from_user.username} {message.from_user.first_name}</b>\n\n"
-                                         f"{message.caption}\n\n"
+                                 caption=f"<b>Отчет по клиенту от @{message.from_user.username} #{message.from_user.first_name}</b>\n\n"
+                                         f"Комментарий: {message.caption}\n\n"
                                          f"Создано: {message.date}")
+
+
         except Exception as e:
             pass
 
@@ -48,8 +45,8 @@ async def client_report_getter(message: Message, state: FSMContext):
         try:
             await bot.send_photo(admin,
                                  photo=message.photo[-1].file_id,
-                                 caption=f"<b>Отчет по клиенту от @{message.from_user.username} {message.from_user.first_name}</b>\n\n"
-                                         f"{message.caption}\n\n"
+                                 caption=f"<b>Отчет по клиенту от @{message.from_user.username} #{message.from_user.first_name}</b>\n\n"
+                                         f"Комментарий: {message.caption}\n\n"
                                          f"Создано: {message.date}")
         except Exception as e:
             pass

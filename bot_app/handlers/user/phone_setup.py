@@ -28,6 +28,7 @@ async def get_contact(message: Message, state: FSMContext):
                 await bot.send_message(message.from_user.id,
                                        'Ваш номер телефона принят, администратор назначит вам роль и вы будете оповещены об этом!',
                                        reply_markup=ReplyKeyboardRemove())
+                return
         return
     await bot.send_message(message.from_user.id,
                            'Можно отправлять только свой номер телефона!',

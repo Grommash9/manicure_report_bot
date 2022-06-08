@@ -22,7 +22,7 @@ async def client_report_cancel(message: Message, state: FSMContext):
     await state.set_state(Administrator.main)
     await bot.send_message(message.from_user.id,
                            'Отправка отчета отменена успешно',
-                           reply_markup=markup.user.master_m.main_menu())
+                           reply_markup=markup.user.administrator_m.main_menu())
 
 
 @dp.message_handler(content_types=aiogram.types.ContentType.TEXT, state=Administrator.StartDay.time)
@@ -52,7 +52,7 @@ async def client_report_getter(message: Message, state: FSMContext):
     for admins in config.ADMINS:
         try:
             await bot.send_message(admins,
-                                   f"<b>Администратор @{message.from_user.username} {message.from_user.first_name} открыл смену!</b>\n\n"
+                                   f"<b>Администратор @{message.from_user.username} #{message.from_user.first_name} открыл смену!</b>\n\n"
                                    f"Время открытия: {data['time']}\n"
                                    f"Деньги в кассе: {data['cash']}\n"
                                    f"Комментарий: {data['comment']}\n")
