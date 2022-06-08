@@ -11,9 +11,9 @@ from bot_app.state.user.master import Master
 async def user_download(message: Message, state: FSMContext):
     await state.set_state(Master.EndDayReport.time)
     await bot.send_message(message.from_user.id,
-                           'Введите время закрытия смены: \n\n'
-                           'Например 15:00',
-                           reply_markup=markup.base.cancel())
+                           'Как прошел день? 😊 Возможно, у тебя есть пожелания или идеи?\n'
+                            '(Добавить кнопку Пропустить )',
+                           reply_markup=markup.user.administrator_m.comment_menu())
 
 
 
@@ -31,7 +31,7 @@ async def client_report_getter(message: Message, state: FSMContext):
     await state.set_data({'time': message.text})
     await state.set_state(Master.EndDayReport.photo)
     await bot.send_message(message.from_user.id,
-                           'Пожалуйста отправьте фото с описанием, оно будет доставлено администрации: ',
+                           'Что бы в HEY GIRLS была всегда чистота и порядок прикрепи, пожалуйста, фотографию своего рабочего места в зоне маникюра и педикюра. 👌',
                            reply_markup=markup.base.cancel())
 
 
@@ -63,6 +63,6 @@ async def client_report_getter(message: Message, state: FSMContext):
             pass
 
     await bot.send_message(message.from_user.id,
-                           'Отчет успешно отправлен',
+                           'Твои сегодняшние отчеты успешно отправлены👌',
                            reply_markup=markup.user.master_m.main_menu())
 

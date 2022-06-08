@@ -11,7 +11,7 @@ from bot_app.state.user.master import Master
 async def client_report_getter(message: Message, state: FSMContext):
     await state.set_state(Master.ClientReport.photo)
     await bot.send_message(message.from_user.id,
-                           'Пожалуйста отправьте фото с описанием, оно будет доставлено администрации: ',
+                           'Пожалуйста, прикрепи фотографию своей работы, если у тебя есть комментарий, ты можешь его добавить 😊',
                            reply_markup=markup.base.cancel())
 
 
@@ -52,5 +52,6 @@ async def client_report_getter(message: Message, state: FSMContext):
             pass
 
     await bot.send_message(message.from_user.id,
-                           'Отчет успешно отправлен',
+                           'Супер! Твой отчет успешно отправлен!'
+                            'Уверенны, что твоя работа КРУТАЯ👌',
                            reply_markup=markup.user.master_m.main_menu())
