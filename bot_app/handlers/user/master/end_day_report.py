@@ -11,8 +11,7 @@ from bot_app.state.user.master import Master
 async def user_download(message: Message, state: FSMContext):
     await state.set_state(Master.EndDayReport.time)
     await bot.send_message(message.from_user.id,
-                           'Как прошел день? 😊 Возможно, у тебя есть пожелания или идеи?\n'
-                            '(Добавить кнопку Пропустить )',
+                           'Как прошел день? 😊 Возможно, у тебя есть пожелания или идеи?\n',
                            reply_markup=markup.user.administrator_m.comment_menu())
 
 

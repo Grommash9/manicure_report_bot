@@ -40,7 +40,7 @@ async def client_report_getter(message: Message, state: FSMContext):
     await state.set_state(Administrator.StartDay.comment)
     await bot.send_message(message.from_user.id,
                            'Пожалуйста введите комментарий!',
-                           reply_markup=markup.base.cancel())
+                           reply_markup=markup.user.administrator_m.comment_menu())
 
 
 @dp.message_handler(content_types=aiogram.types.ContentType.TEXT, state=Administrator.StartDay.comment)
