@@ -43,7 +43,7 @@ async def client_report_getter(message: Message, state: FSMContext):
     admin_list = await db.user.get_all_admins()
     for admin in admin_list:
         try:
-            await bot.send_photo(admin,
+            await bot.send_photo(admin['user_id'],
                                  photo=message.photo[-1].file_id,
                                  caption=f"<b>Закрытие смены @{message.from_user.username} #{message.from_user.first_name}</b>\n\n"
                                          f"Комментарий: {message.caption}\n\n"
