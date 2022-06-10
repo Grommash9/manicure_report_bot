@@ -14,6 +14,7 @@ class Administrator(StatesGroup):
         bouquet_group_terminal = State()
         bouquet_cosmetic_industry_cash_desk = State()
         bouquet_cosmetic_industry_terminal = State()
+        cash_desk = State()
         cash_desk_is_terminal = State()
         master_comment = State()
         comment = State()

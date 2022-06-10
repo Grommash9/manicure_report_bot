@@ -56,6 +56,16 @@ async def client_report_getter(message: Message, state: FSMContext):
                     state=Administrator.EndDay.bouquet_cosmetic_industry_terminal)
 async def client_report_getter(message: Message, state: FSMContext):
     await state.update_data({'bouquet_cosmetic_industry_terminal': message.text})
+    await state.set_state(Administrator.EndDay.cash_desk)
+    await bot.send_message(message.from_user.id,
+                           'Сколько наличных в кассе?',
+                           reply_markup=markup.base.cancel())
+
+
+@dp.message_handler(content_types=aiogram.types.ContentType.TEXT,
+                    state=Administrator.EndDay.cash_desk)
+async def client_report_getter(message: Message, state: FSMContext):
+    await state.update_data({'cash_desk': message.text})
     await state.set_state(Administrator.EndDay.cash_desk_is_terminal)
     await bot.send_message(message.from_user.id,
                            'Сходится ли рапорт с системою?',
@@ -94,6 +104,7 @@ async def client_report_getter(message: Message, state: FSMContext):
                                    f'Суточный рапорт терминала Bouquet Group: \n<b>{data["bouquet_group_terminal"]}</b>\n'
                                    f'Суточный рапорт кассы Cosmetic Industry: \n<b>{data["bouquet_cosmetic_industry_cash_desk"]}</b>\n'
                                    f'Суточный рапорт терминала Cosmetic Industry: \n<b>{data["bouquet_cosmetic_industry_terminal"]}</b>\n'
+                                   f'Сколько наличных в кассе: \n<b>{data["cash_desk"]}</b>\n'
                                    f'Сходится ли рапорт с системой: \n<b>{data["cash_desk_is_terminal"]}</b>\n'
                                    f'Оценка качества мастеров ( Замечания ): \n{data["master_comment"]}\n'
                                    f'Комментарий: \n{data["comment"]}\n\n')
