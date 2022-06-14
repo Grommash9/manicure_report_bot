@@ -4,12 +4,12 @@ from babel import Locale
 
 cwd = Path().cwd()
 
-TOKEN = '5413876625:AAGKrFYdPfW_Je0QGud2z6wk3u0TO_mZPfQ'
+TOKEN = '5'
 
 ADMINS = [444083371, 401820003]
 
 
-WEBHOOK_HOST = 'https://142.93.230.250'
+WEBHOOK_HOST = 'https://145.93.230.250'
 WEBHOOK_PATH = f'{cwd.name}'
 WEBHOOK_URL = f"{WEBHOOK_HOST}/{WEBHOOK_PATH}/"
 
